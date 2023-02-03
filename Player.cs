@@ -4,27 +4,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public float speed;
 
-    //VARIAVEL - UM OBJETO NA MEMORIA CAPAZ DE ARMAZENAR DADOS DE DIVERSOS TIPOS
-    public int health = 10;
-    public float speed = 1.2f;
-    bool isAlive;
-    string namePlayer = "Maajr";
+    private Rigidbody2D rig;
+    private Vector2 direction;
 
-    public GameObject ground;
-    public Transform enemy;
-
-    //METODOS SAO BLOCOS DE INSTRUCOES DE CODIGOS
-    void Attack ()
+    private void Start ()
     {
-
+        rig = GetComponent<Rigidbody2D>();
     }
-    void Movement()
+
+
+    private void Update()
     {
-
+        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
-    void Jump()
+
+    private void FixedUpdate()
     {
-
+        rig.MovePosition(rig.position + direction * speed * Time.fixedDeltaTime);
     }
+
+
 }
